@@ -33,7 +33,6 @@ class MiniRouteLoader {
         restAction = restAction.toLowerCase();
         if (restAction == 'get') {
             expressApp.get(endpointURI, (req, res) => __awaiter(this, void 0, void 0, function* () {
-                console.log('controllerClass', controllerClass, methodName);
                 return yield controllerClass[methodName](req, res);
             }));
         }
