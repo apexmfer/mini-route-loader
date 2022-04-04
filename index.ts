@@ -38,7 +38,6 @@ export default class MiniRouteLoader {
 
     if (restAction == 'get') {
       expressApp.get(endpointURI, async (req: any, res: any) => {
-          console.log('controllerClass', controllerClass,methodName)
         return await controllerClass[methodName](req, res)
       })
     }
