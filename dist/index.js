@@ -17,18 +17,17 @@ class MiniRouteLoader {
     }
     static configureRoute(expressApp, route, controllerClass) {
         console.log('configuring route', route);
-        if (route.length != 2) {
-            throw 'Error: invalid route format';
+        let restAction = route.type;
+        let endpointURI = route.uri;
+        let methodName = route.method;
+        if (typeof endpointURI != 'string') {
+            throw 'Error: invalid route format for endpointURI';
         }
-        const fullURI = route[0];
-        const methodName = route[1];
-        if (typeof fullURI != 'string' || typeof methodName != 'string') {
-            throw 'Error: invalid route format';
+        if (typeof methodName != 'string') {
+            throw 'Error: invalid route format for methodName';
         }
-        let restAction = fullURI.split(' ')[0];
-        const endpointURI = fullURI.split(' ')[1];
-        if (typeof restAction != 'string' || typeof endpointURI != 'string') {
-            throw 'Error: invalid route format';
+        if (typeof restAction != 'string') {
+            throw 'Error: invalid route format for restAction';
         }
         restAction = restAction.toLowerCase();
         if (restAction == 'get') {
