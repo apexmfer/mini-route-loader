@@ -1,6 +1,8 @@
 #### Mini Route Loader
 
+ Route file configuration for express 
 
+ See the unit test for implementation instructions 
 
 
 ## In your express initialization code 
@@ -36,10 +38,10 @@
 ## In routes.json 
 
 
-        [
-            ["get /api/ping", "ping"]
-
-        ]
+  [ 
+    {"type":"get","uri":"/api/ping","method":"ping","controller":"api"}
+ 
+]
 
 
 ## In your controller class
