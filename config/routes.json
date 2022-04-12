@@ -1,4 +1,4 @@
-[
-    ["get /api/ping", "ping"]
-
+[ 
+    {"type":"get","uri":"/api/ping","method":"ping","controller":"api"},
+ 
 ]

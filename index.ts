@@ -3,9 +3,15 @@
 
 export type APICall = (req: any, res: any) => any
 
+export interface MiniRoute {
+  type:string,
+  uri: string,
+  method: string,
+  controller: string
+}
+
 export default class MiniRouteLoader {
 
- 
 
   static loadRoutes(expressApp: any, routesConfig: any, controllerClass: any) {
     for (const route of routesConfig) {
@@ -13,22 +19,17 @@ export default class MiniRouteLoader {
     }
   }
 
-  static configureRoute(expressApp: any, route: any, controllerClass: any) {
+  static configureRoute(expressApp: any, route: MiniRoute, controllerClass: any) {
     console.log('configuring route', route)
+ 
+    let restAction: string = route.type 
+    let endpointURI: string = route.uri
+    let methodName: string = route.method
 
-    if (route.length != 2) {
+    if (typeof endpointURI != 'string' || typeof methodName != 'string') {
       throw 'Error: invalid route format'
     }
-
-    const fullURI: string = route[0]
-    const methodName: string = route[1]
-
-    if (typeof fullURI != 'string' || typeof methodName != 'string') {
-      throw 'Error: invalid route format'
-    }
-
-    let restAction = fullURI.split(' ')[0]
-    const endpointURI = fullURI.split(' ')[1]
+ 
 
     if (typeof restAction != 'string' || typeof endpointURI != 'string') {
       throw 'Error: invalid route format'
