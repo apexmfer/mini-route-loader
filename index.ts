@@ -13,7 +13,7 @@ export interface MiniRoute {
 export default class MiniRouteLoader {
 
 
-  static loadRoutes(expressApp: any, routesConfig: any, controllerClass: any) {
+  static loadRoutes(expressApp: any, routesConfig: Array<MiniRoute>, controllerClass: any) {
     for (const route of routesConfig) {
       MiniRouteLoader.configureRoute(expressApp, route, controllerClass)
     }
@@ -26,13 +26,16 @@ export default class MiniRouteLoader {
     let endpointURI: string = route.uri
     let methodName: string = route.method
 
-    if (typeof endpointURI != 'string' || typeof methodName != 'string') {
-      throw 'Error: invalid route format'
+    if (typeof endpointURI != 'string' ) {
+      throw 'Error: invalid route format for endpointURI'
     }
- 
 
-    if (typeof restAction != 'string' || typeof endpointURI != 'string') {
-      throw 'Error: invalid route format'
+    if (typeof methodName != 'string') {
+      throw 'Error: invalid route format for methodName'
+    } 
+
+    if (typeof restAction != 'string') {
+      throw 'Error: invalid route format for restAction'
     }
 
     restAction = restAction.toLowerCase()
