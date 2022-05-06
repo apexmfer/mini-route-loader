@@ -1,6 +1,6 @@
 {
   "name": "mini-route-loader",
-  "version": "0.22.0",
+  "version": "0.24.0",
   "description": "Load routes to controllers for Express",
   "main": "dist/index.js",
   "scripts": {
