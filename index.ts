@@ -63,7 +63,7 @@ export default class MiniRouteLoader {
       return Object.assign( req , {router: { params: appendParams }})
     }
 
-    return req 
+    return Object.assign( req , {router: { params: {}  }}) 
 
   }
 

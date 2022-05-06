@@ -20,6 +20,7 @@ class MiniRouteLoader {
         let restAction = route.type;
         let endpointURI = route.uri;
         let methodName = route.method;
+        let appendParams = JSON.parse(JSON.stringify(route.appendParams));
         if (typeof endpointURI != 'string') {
             throw 'Error: invalid route format for endpointURI';
         }
@@ -32,14 +33,22 @@ class MiniRouteLoader {
         restAction = restAction.toLowerCase();
         if (restAction == 'get') {
             expressApp.get(endpointURI, (req, res) => __awaiter(this, void 0, void 0, function* () {
+                req = MiniRouteLoader.appendParams(req, appendParams);
                 return yield controllerClass[methodName](req, res);
             }));
         }
         if (restAction == 'post') {
             expressApp.post(endpointURI, (req, res) => __awaiter(this, void 0, void 0, function* () {
+                req = MiniRouteLoader.appendParams(req, appendParams);
                 return yield controllerClass[methodName](req, res);
             }));
         }
+    }
+    static appendParams(req, appendParams) {
+        if (appendParams) {
+            return Object.assign(req, { router: { params: appendParams } });
+        }
+        return Object.assign(req, { router: { params: {} } });
     }
 }
 exports.default = MiniRouteLoader;
