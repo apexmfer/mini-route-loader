@@ -25,8 +25,8 @@ export default class MiniRouteLoader {
  
     let restAction: string = route.type 
     let endpointURI: string = route.uri
-    let methodName: string = route.method
-    let appendParams: any =  JSON.parse(JSON.stringify( route.appendParams )) 
+    let methodName: string = route.method 
+    let appendParams: any = route.appendParams ? JSON.parse(JSON.stringify( route.appendParams )) : undefined
 
     if (typeof endpointURI != 'string' ) {
       throw 'Error: invalid route format for endpointURI'
